@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_app/features/home/presentation/provider/main_prvider.dart';
 import 'package:test_app/general/utils/app_color.dart';
 import 'package:test_app/main.dart';
 
@@ -32,7 +33,7 @@ class _CustomDialogWidState extends State<CustomDialogWid> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        const Text("New Task"),
+                        const Text("New Data"),
                         TextFormField(
                           controller: stateUserAdd.nameController,
                           decoration: const InputDecoration(
@@ -41,38 +42,30 @@ class _CustomDialogWidState extends State<CustomDialogWid> {
                         ),
                         TextFormField(
                           // validator: ,
-                          controller: stateUserAdd.ageController,
+                          controller: stateUserAdd.amountController,
                           decoration: const InputDecoration(
-                            hintText: "enter your age",
+                            hintText: "enter amount",
                           ),
                           keyboardType: TextInputType.number,
                         ),
                         InkWell(
                           onTap: () async {
                             if (stateUserAdd.nameController.text.isNotEmpty &&
-                                stateUserAdd.ageController.text.isNotEmpty) {
-                              try {
-                               // int age = int.parse(stateUserAdd.ageController.text);
-                                stateUserAdd.addUser( errors: (p0) {
-                                    
-                                },
-                                 onSuccess:() {
-                                   Navigator.pop(context);
-                                },
+                                stateUserAdd.amountController.text.isNotEmpty) {
+                              
+                                stateUserAdd.addData(onSuccess: () { 
+                                  
+                                  Navigator.pop(context);
+                                 }, errors: (String errorMessage) {  }  
                                 );
-                                // stateUserAdd.setUser(
-                                //     age: age, name: stateUserAdd.nameController.text, search: generateKeywords ("${stateUserAdd.nameController.text} ${stateUserAdd.ageController.text}"));
+                               
                                  stateUserAdd.addShowDialog(context);
-                                //await stateUserAdd.addUser(context);
+                               
                                stateUserAdd. nameController.clear();
-                                stateUserAdd.ageController.clear();
+                                stateUserAdd.amountController.clear();
                                 Navigator.pop(context);
                               
-                              } catch (e) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text(" invalid Name or Age")));
-                              }
+                           
                             }
                           },
                           child: Container(
